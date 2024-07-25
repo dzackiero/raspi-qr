@@ -5,6 +5,7 @@ import paho.mqtt.client as mqtt
 from pyzbar import pyzbar
 import tkinter as tk
 from tkinter import messagebox
+from PIL import Image, ImageTk
 
 
 class QRScannerApp:
@@ -180,12 +181,10 @@ class QRScannerApp:
             return
 
         frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        height, width, channel = frame_rgb.shape
-        q_img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
-        q_img = cv2.resize(q_img, (640, 640))
-        photo = tk.PhotoImage(master=self.scanner_frame, width=640, height=640)
-        self.scanner_frame.configure(image=photo)
-        self.scanner_frame.image = photo
+        img = Image.fromarray(frame_rgb)
+        imgtk = ImageTk.PhotoImage(image=img)
+        self.scanner_frame.imgtk = imgtk
+        self.scanner_frame.configure(image=imgtk)
 
         decoded_objects = pyzbar.decode(frame)
         for obj in decoded_objects:
