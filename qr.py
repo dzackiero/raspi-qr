@@ -11,6 +11,7 @@ from PIL import Image, ImageTk
 class QRScannerApp:
     def __init__(self, root):
         self.root = root
+        self.root.attributes("-fullscreen", True)
         self.root.title("QR Code Scanner")
         self.root.geometry("800x800")
         self.root.configure(bg="#ffffff")
@@ -27,7 +28,7 @@ class QRScannerApp:
             bg="#ffffff",
             fg="#333333",
         )
-        title_label.pack(pady=20)
+        title_label.pack(pady=20, side=tk.TOP)
 
         # Start Scanning Button
         self.start_button = tk.Button(
@@ -39,7 +40,7 @@ class QRScannerApp:
             height=2,
             command=self.show_scanner,
         )
-        self.start_button.pack(pady=20)
+        self.start_button.pack(pady=20, side=tk.TOP)
 
         # Input Code Button
         self.input_code_button = tk.Button(
@@ -51,16 +52,16 @@ class QRScannerApp:
             height=2,
             command=self.show_input_form,
         )
-        self.input_code_button.pack(pady=20)
+        self.input_code_button.pack(pady=20, side=tk.TOP)
 
         # Scanner Frame
         self.scanner_frame = tk.Label(self.root, bg="#e0e0e0", width=640, height=640)
-        self.scanner_frame.pack(pady=20)
+        self.scanner_frame.pack(pady=20, side=tk.TOP)
         self.scanner_frame.pack_forget()
 
         # Input Form
         self.code_input = tk.Entry(self.root, font=("Helvetica", 16))
-        self.code_input.pack(pady=20)
+        self.code_input.pack(pady=20, side=tk.TOP)
         self.code_input.pack_forget()
 
         self.submit_button = tk.Button(
@@ -72,7 +73,7 @@ class QRScannerApp:
             height=2,
             command=self.submit_code,
         )
-        self.submit_button.pack(pady=20)
+        self.submit_button.pack(pady=20, side=tk.TOP)
         self.submit_button.pack_forget()
 
         # Back Button
@@ -85,7 +86,7 @@ class QRScannerApp:
             height=2,
             command=self.show_main,
         )
-        self.back_button.pack(pady=20)
+        self.back_button.pack(pady=20, side=tk.TOP)
         self.back_button.pack_forget()
 
         self.timer = None
@@ -147,8 +148,8 @@ class QRScannerApp:
         return json_string
 
     def show_main(self):
-        self.start_button.pack(pady=20)
-        self.input_code_button.pack(pady=20)
+        self.start_button.pack(pady=20, side=tk.TOP)
+        self.input_code_button.pack(pady=20, side=tk.TOP)
         self.scanner_frame.pack_forget()
         self.code_input.pack_forget()
         self.submit_button.pack_forget()
@@ -162,17 +163,17 @@ class QRScannerApp:
     def show_scanner(self):
         self.start_button.pack_forget()
         self.input_code_button.pack_forget()
-        self.scanner_frame.pack(pady=20)
-        self.back_button.pack(pady=20)
+        self.scanner_frame.pack(pady=20, side=tk.TOP)
+        self.back_button.pack(pady=20, side=tk.TOP)
         self.cap = cv2.VideoCapture(0)
         self.update_frame()
 
     def show_input_form(self):
         self.start_button.pack_forget()
         self.input_code_button.pack_forget()
-        self.code_input.pack(pady=20)
-        self.submit_button.pack(pady=20)
-        self.back_button.pack(pady=20)
+        self.code_input.pack(pady=20, side=tk.TOP)
+        self.submit_button.pack(pady=20, side=tk.TOP)
+        self.back_button.pack(pady=20, side=tk.TOP)
 
     def update_frame(self):
         ret, frame = self.cap.read()
