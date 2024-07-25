@@ -23,7 +23,7 @@ class QRScannerApp:
         # Title
         title_label = tk.Label(
             self.root,
-            text="Welcome to LockIt, press 'Start Scanning' or 'Enter' to scan your QR Code",
+            text="Welcome to LockIt, press 'Start Scanning' or 'Input Your Code'",
             font=("Helvetica", 18),
             bg="#ffffff",
             fg="#333333",
